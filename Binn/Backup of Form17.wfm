@@ -1,0 +1,192 @@
+** END HEADER -- do not remove this line
+//
+// Generated on 04/20/2021
+//
+parameter bModal
+local f
+f = new FORM2FORM()
+if (bModal)
+   f.mdi = false // ensure not MDI
+   f.readModal()
+else
+   f.open()
+endif
+
+class FORM2FORM of FORM
+   with (this)
+      onOpen = class::FORM_ONOPEN
+      colorNormal = "0x80ffff"
+      height = 28.6364
+      left = -7.8571
+      top = 1.3636
+      width = 108.7143
+      text = "Afisare Pacienti"
+   endwith
+
+   this.TEXT1 = new TEXT(this)
+   with (this.TEXT1)
+      height = 1.293
+      left = 6.0
+      top = 2.0
+      width = 15.1641
+      colorNormal = "R+/0x80ffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "Dupa CNP"
+   endwith
+
+   this.ENTRYFIELD1 = new ENTRYFIELD(this)
+   with (this.ENTRYFIELD1)
+      height = 1.5293
+      left = 24.8571
+      top = 1.7727
+      width = 34.0
+      value = ""
+   endwith
+
+   this.PUSHBUTTON1 = new PUSHBUTTON(this)
+   with (this.PUSHBUTTON1)
+      onClick = class::PUSHBUTTON1_ONCLICK
+      height = 2.0596
+      left = 70.7143
+      top = 1.4545
+      width = 24.0
+      text = "AFISEAZA INFORMATII PACIENT"
+      group = true
+   endwith
+
+   this.ENTRYFIELD2 = new ENTRYFIELD(this)
+   with (this.ENTRYFIELD2)
+      height = 1.3516
+      left = 25.0
+      top = 4.6364
+      width = 33.3311
+      value = ""
+   endwith
+
+   this.ENTRYFIELD3 = new ENTRYFIELD(this)
+   with (this.ENTRYFIELD3)
+      height = 1.1768
+      left = 25.0
+      top = 6.4545
+      width = 33.5
+      value = ""
+   endwith
+
+   this.ENTRYFIELD4 = new ENTRYFIELD(this)
+   with (this.ENTRYFIELD4)
+      height = 1.293
+      left = 24.7143
+      top = 8.4091
+      width = 33.835
+      value = ""
+   endwith
+
+   this.ENTRYFIELD5 = new ENTRYFIELD(this)
+   with (this.ENTRYFIELD5)
+      height = 1.2727
+      left = 25.0
+      top = 10.5
+      width = 33.8571
+      value = ""
+   endwith
+
+   this.ENTRYFIELD6 = new ENTRYFIELD(this)
+   with (this.ENTRYFIELD6)
+      height = 1.0
+      left = 25.0
+      top = 12.5
+      width = 34.0
+      value = ""
+   endwith
+
+   this.TEXT2 = new TEXT(this)
+   with (this.TEXT2)
+      height = 1.293
+      left = 5.8571
+      top = 4.5455
+      width = 16.0
+      colorNormal = "BtnText/0x80ffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "NUME"
+   endwith
+
+   this.TEXT3 = new TEXT(this)
+   with (this.TEXT3)
+      height = 1.0
+      left = 6.0
+      top = 6.4091
+      width = 16.0
+      colorNormal = "BtnText/0x80ffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "PRENUME"
+   endwith
+
+   this.TEXT4 = new TEXT(this)
+   with (this.TEXT4)
+      height = 1.0
+      left = 5.4286
+      top = 8.3636
+      width = 15.0
+      colorNormal = "BtnText/0x80ffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "CNP"
+   endwith
+
+   this.TEXT5 = new TEXT(this)
+   with (this.TEXT5)
+      height = 1.0
+      left = 6.0
+      top = 12.5
+      width = 15.0
+      colorNormal = "BtnText/0x80ffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "DIAGNOSTIC"
+   endwith
+
+   this.TEXT7 = new TEXT(this)
+   with (this.TEXT7)
+      height = 1.0
+      left = 7.0
+      top = 10.5
+      width = 15.0
+      colorNormal = "BtnText/0x80ffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "DATA_CONSULT"
+   endwith
+
+   Procedure Form_OnOpen
+   return   	
+
+	Procedure PUSHBUTTON1_OnClick	
+	select 1
+         Vcnp=VAL(form.entryfield1.value)
+         
+         seek Vcnp
+         
+         if found()
+         
+           form.entryfield2.value=pac->Nume
+           form.entryfield3.value=pac->Prenume
+           form.entryfield4.value=pac->CNP
+           form.entryfield5.value=fi->Data_consult
+           form.entryfield6.value=di->denumire
+           
+         else
+         
+           form.entryfield2.value="pacient inexistent"
+           form.entryfield3.value="pacient inexistent"
+           form.entryfield4.value="pacient inexistent"
+           form.entryfield5.value="pacient inexistent"
+           form.entryfield6.value="pacient inexistent"
+           
+          endif 
+   return	
+
+endclass
+

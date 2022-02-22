@@ -1,0 +1,166 @@
+** END HEADER -- do not remove this line
+//
+// Generated on 05/02/2021
+//
+parameter bModal
+local f
+f = new CABINETFORM()
+if (bModal)
+   f.mdi = false // ensure not MDI
+   f.readModal()
+else
+   f.open()
+endif
+
+class CABINETFORM of FORM
+   with (this)
+      onOpen = class::FORM_ONOPEN
+      onClose = class::FORM_ONCLOSE
+      colorNormal = "0x5bffff"
+      height = 28.6364
+      left = 8.1429
+      top = 3.7727
+      width = 108.7143
+      text = "Cabinet medic familie"
+      autoSize = true
+   endwith
+
+   this.TEXT1 = new TEXT(this)
+   with (this.TEXT1)
+      height = 2.1364
+      left = 3.0
+      top = 1.5455
+      width = 94.0
+      border = true
+      colorNormal = "R+/BtnFace"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      fontName = "Verdana"
+      text = "Bine ati venit la Cabinet medic familie !"
+   endwith
+
+   this.TEXT2 = new TEXT(this)
+   with (this.TEXT2)
+      height = 1.5909
+      left = 3.0
+      top = 5.2273
+      width = 94.0
+      colorNormal = "BtnText/0x5bffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "Va rugam sa selectati o optiune din meniu sau apasati un  buton!"
+   endwith
+
+   this.PUSHBUTTON1 = new PUSHBUTTON(this)
+   with (this.PUSHBUTTON1)
+      onClick = class::PUSHBUTTON1_ONCLICK
+      height = 1.7727
+      left = 2.0
+      top = 9.0
+      width = 18.0
+      text = "Cautare Pacient dupa CNP"
+      group = true
+      colorNormal = "R+/BtnFace"
+   endwith
+
+   this.PUSHBUTTON2 = new PUSHBUTTON(this)
+   with (this.PUSHBUTTON2)
+      onClick = class::PUSHBUTTON2_ONCLICK
+      height = 1.7727
+      left = 21.0
+      top = 9.0
+      width = 18.0
+      text = "Modificare concediu medical "
+      group = true
+      colorNormal = "R+/BtnFace"
+   endwith
+
+   this.PUSHBUTTON3 = new PUSHBUTTON(this)
+   with (this.PUSHBUTTON3)
+      onClick = class::PUSHBUTTON3_ONCLICK
+      height = 1.7727
+      left = 40.0
+      top = 9.0
+      width = 18.0
+      text = "Concediu maxim"
+      group = true
+      colorNormal = "R+/BtnFace"
+   endwith
+
+   this.PUSHBUTTON5 = new PUSHBUTTON(this)
+   with (this.PUSHBUTTON5)
+		onClick = class::PUSHBUTTON5_ONCLICK
+      height = 1.7727
+      left = 59.0
+      top = 9.0
+      width = 18.0
+      text = "Clasament vizite medicale"
+      group = true
+      colorNormal = "R+/BtnFace"
+   endwith
+
+   this.PUSHBUTTON6 = new PUSHBUTTON(this)
+   with (this.PUSHBUTTON6)
+      onClick = class::PUSHBUTTON6_ONCLICK
+		height = 1.7727
+      left = 79.0
+      top = 9.0
+      width = 18.0
+      text = "Numar controale pacient dat"
+      group = true
+      colorNormal = "R+/BtnFace"
+   endwith
+
+
+   Procedure Form_OnOpen
+   
+   clear
+	
+	use pacient.dbf
+	index on CNP to icnp
+	
+	use fisa.dbf
+	index on CNP to ifcnp
+	
+	use diagnostice.dbf
+	index on Cod_diagnostic to icodd
+
+	use pacient.dbf in 1 index icnp alias pac
+	use fisa.dbf in 2 index fcnp alias fi
+	use diagnostice.dbf in 3 index codd alias di
+	
+	select pac
+	set relation to CNP into fi
+	select fi
+	set relation to Cod_diagnostic into di
+   return
+   
+
+   Procedure Form_OnClose
+   
+   close all
+   use
+   
+   return
+	
+
+   Procedure PUSHBUTTON1_OnClick
+   do Form17.wfm
+   return
+   
+
+	Procedure PUSHBUTTON2_OnClick
+   do Punctulb.prg
+	return
+	
+
+	Procedure PUSHBUTTON3_OnClick
+   do Form27.wfm
+	return
+
+	Procedure PUSHBUTTON6_OnClick
+   do Form37.wfm
+	return
+
+endclass
+

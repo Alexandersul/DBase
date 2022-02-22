@@ -1,0 +1,150 @@
+** END HEADER -- do not remove this line
+//
+// Generated on 05/02/2021
+//
+parameter bModal
+local f
+f = new Form37Form()
+if (bModal)
+   f.mdi = false // ensure not MDI
+   f.readModal()
+else
+   f.open()
+endif
+
+class Form37Form of FORM
+   with (this)
+      onOpen = class::FORM_ONOPEN
+      colorNormal = "0x80ffff"
+      height = 23.5455
+      left = -1.2857
+      top = 0.5
+      width = 106.4286
+      text = "Afisare control"
+   endwith
+
+   this.TEXT1 = new TEXT(this)
+   with (this.TEXT1)
+      height = 1.293
+      left = 6.0
+      top = 2.0
+      width = 15.1641
+      colorNormal = "R+/0x80ffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "Dupa CNP"
+   endwith
+
+   this.ENTRYFIELD1 = new ENTRYFIELD(this)
+   with (this.ENTRYFIELD1)
+      height = 1.5293
+      left = 24.8571
+      top = 1.7727
+      width = 34.0
+      value = ""
+   endwith
+
+   this.PUSHBUTTON1 = new PUSHBUTTON(this)
+   with (this.PUSHBUTTON1)
+      onClick = class::PUSHBUTTON1_ONCLICK
+      height = 2.0596
+      left = 70.7143
+      top = 1.4545
+      width = 24.0
+      text = "AFISEAZA NUMAR CONTROALE"
+      group = true
+   endwith
+
+   this.ENTRYFIELD2 = new ENTRYFIELD(this)
+   with (this.ENTRYFIELD2)
+      height = 1.3516
+      left = 25.0
+      top = 4.6364
+      width = 33.3311
+      value = ""
+   endwith
+
+   this.ENTRYFIELD3 = new ENTRYFIELD(this)
+   with (this.ENTRYFIELD3)
+      height = 1.1768
+      left = 25.0
+      top = 6.4545
+      width = 33.5
+      value = ""
+   endwith
+
+   this.ENTRYFIELD4 = new ENTRYFIELD(this)
+   with (this.ENTRYFIELD4)
+      height = 1.1818
+      left = 25.0
+      top = 8.5
+      width = 33.4286
+      value = ""
+   endwith
+
+   this.TEXT2 = new TEXT(this)
+   with (this.TEXT2)
+      height = 1.293
+      left = 5.8571
+      top = 4.5455
+      width = 16.0
+      colorNormal = "BtnText/0x80ffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "Recomandari"
+   endwith
+
+   this.TEXT3 = new TEXT(this)
+   with (this.TEXT3)
+      height = 1.0
+      left = 6.0
+      top = 6.4091
+      width = 16.0
+      colorNormal = "BtnText/0x80ffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "Diagnostic"
+   endwith
+
+   this.TEXT4 = new TEXT(this)
+   with (this.TEXT4)
+      height = 1.0
+      left = 7.0
+      top = 8.5
+      width = 16.0
+      colorNormal = "BtnText/0x80ffff"
+      alignVertical = 1	// Middle
+      alignHorizontal = 1	// Center
+      text = "Numar controale"
+   endwith			
+
+   Procedure Form_OnOpen
+   return
+   
+
+   Procedure PUSHBUTTON1_OnClick
+	a=0
+	
+	aVcnp=VAL(form.entryfield1.value)
+	
+	select 2
+	set filter to fi->CNP=aVcnp
+	select 2
+	go top
+	
+	do while .not. eof(2)
+	a=a+1
+	skip in 2
+	enddo
+	select 2
+	go top
+	seek aVcnp
+	if found()
+	form.entryfield2.value="recomandari neschimbate"
+   form.entryfield3.value="diagnostic neschimbat"
+   form.entryfield4.value=1
+	endif
+	return
+
+endclass
+
